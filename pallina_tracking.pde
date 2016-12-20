@@ -2,7 +2,7 @@ import processing.video.*;
 import gab.opencv.*;
 
 Capture cam;
-//Movie video;
+
 OpenCV opencv;
 
 void setup() {
@@ -10,14 +10,12 @@ void setup() {
   cam = new Capture(this, 640, 480, 30);
   cam.start();
   
-   //size(600 , 300);
-  //video = new Movie(this, "/Users/Luca/Downloads/pinball.mp4");
+
   opencv = new OpenCV(this, 640, 480);
   
   opencv.startBackgroundSubtraction(5, 3, 0.1);
   
-  //video.loop();
-  //video.play();
+
 }
 
 void draw() {
@@ -30,12 +28,14 @@ void draw() {
   image(cam, 0, 0);  
   opencv.loadImage(cam);
   
- 
+//erode l'immagine per identificare gli oggetti in movimento 
   
   opencv.updateBackground();
   
   opencv.dilate();
   opencv.erode();
+
+//disegna linea attorno all'oggetto in movimento
 
   noFill();
   stroke(255, 0, 0);
